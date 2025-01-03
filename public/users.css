@@ -1,0 +1,19 @@
+body {
+    background: mintcream;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-top: 50px;
+}
+
+.container {
+    width: 50%;
+}
+
+.form-group {
+    margin: 20px;
+}
