@@ -33,7 +33,7 @@
     </div>
     <h2 class="text-center">Edit user</h2>
     <div class="container mt-3">
-        <form class="border border-secondary" id="form-user">
+        <form class="border border-secondary" id="form-edit">
             <div class="form-group">
                 <label for="userId">User ID</label>
                 <input type="text" class="form-control"
@@ -63,21 +63,9 @@
             </div>
         </form>
     </div>
-    <h2 class="text-center">User list</h2>
-    <div class="container mt-3">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Age</th>
-                <th scope="col">ID</th>
-            </tr>
-            </thead>
-            <tbody id="usersList"></tbody>
-        </table>
-    </div>
-    <script src="script.js"></script>
+    <div id="table"></div>
+
+    <script src="./scripts/table.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
