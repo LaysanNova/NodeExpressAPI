@@ -2,9 +2,9 @@ const createTable = () => {
     const table = document.getElementById('table');
 
     table.innerHTML = `
-        <h2 class="text-center">User list</h2>
-        <div class="container mt-3">
-            <table class="table table-striped">
+        <h2 class="text-center">Users List</h2>
+        <div class="container">
+            <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -12,6 +12,8 @@ const createTable = () => {
                     <th scope="col">Last</th>
                     <th scope="col">Age</th>
                     <th scope="col">ID</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
                 </tr>
                 </thead>
                 <tbody id="usersList"></tbody>
@@ -20,4 +22,4 @@ const createTable = () => {
     `;
 }
 
-createTable()
+createTable();

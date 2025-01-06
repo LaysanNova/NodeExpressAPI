@@ -1,42 +1,43 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import usersRoutes from './routes/users.routes.js';
+import usersRoutes from './routes/users.js';
 import path from 'path';
-import log from "./logger/logger.js";
+import log from './logger/logger.js';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 5000;
 
 let staticPath = path.join(path.resolve(), 'public');
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use('/api/users/', usersRoutes);
+app.use('/api/users', usersRoutes);
 
+//GET '/'
 app.get('/', (req, res) => {
     res.sendFile(path.join(staticPath, 'index.html'));
-});
+})
 
 app.get('/add', (req, res) => {
     res.sendFile(path.join(staticPath, 'index.html'));
-});
+})
 
 app.get('/search', (req, res) => {
     res.sendFile(path.join(staticPath, 'search.html'));
-});
+})
 
 app.get('/edit', (req, res) => {
     res.sendFile(path.join(staticPath, 'edit.html'));
-});
+})
 
 app.get('/delete', (req, res) => {
     res.sendFile(path.join(staticPath, 'delete.html'));
-});
-
-//GET '/'
-app.get('/api/', (req, res) => {
-    log.info("GET request to endpoint '/'");
-    res.send("Node Express API Server App!");
 })
 
-app.listen(PORT, () => log.server(`Listening on port ${PORT}`));
+app.get('/api/', (req, res) => {
+    log.info("GET request to endpoint '/' received.");
+
+    res.send("Node Express API Server App");
+})
+
+app.listen(PORT, () => log.server(`Server is running on http://localhost:${PORT}`))
