@@ -35,9 +35,9 @@ app.get('/delete', (req, res) => {
 })
 
 app.get('/api/', (req, res) => {
-    log.info("GET request to endpoint '/' received.");
+    log.info("GET request to endpoint 'api/' received.");
 
-    res.send("Node Express API Server App");
+    res.send("Node Express API Server App!");
 })
 
 app.listen(PORT, () => log.server(`Server is running on http://localhost:${PORT}`))
