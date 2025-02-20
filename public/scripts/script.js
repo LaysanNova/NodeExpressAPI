@@ -20,6 +20,9 @@ const defaultFirstNamePlaceholder = "Enter first name...";
 const defaultLastNamePlaceholder = "Enter last name...";
 const defaultAgePlaceholder = "Enter age...";
 
+const URL = "http://localhost:5000/";
+//const URL = "https://nodeexpressapi-n9sc.onrender.com/";
+
 //mock data
 const usersFromData = [
     {
@@ -184,9 +187,7 @@ class UI {
         const searchCriteria = UI.getSearchCriteria();
         console.log("searchCriteria", searchCriteria);
 
-        if(UI.isSearchCriteriaValid(searchCriteria)) {
-            searchButton.disabled = false;
-        }
+        searchButton.disabled = !UI.isSearchCriteriaValid(searchCriteria);
     }
 
     static preventSearchUrl() {
@@ -281,6 +282,10 @@ class UI {
         editButton.disabled = false;
     }
 
+    static deactivateEditButton() {
+        editButton.disabled = true;
+    }
+
     static activateDeleteButton() {
         if(userIdInput.placeholder !== defaultIdPlaceholder
             && firstNameInput.placeholder !== defaultFirstNamePlaceholder
@@ -329,7 +334,7 @@ class UI {
 
 class AppService {
     static getAppName() {
-        return fetch("https://nodeexpressapi-n9sc.onrender.com/api/")
+        return fetch(URL + "api/")
             .then(response => {
                 if (response.status !== 200) {
                     console.error("[ERROR] Response status: ", response.status);
@@ -347,7 +352,7 @@ class AppService {
 
 class UserService {
     static getUsers() {
-        return fetch("https://nodeexpressapi-n9sc.onrender.com/api/users/")
+        return fetch(URL + "api/users/")
             .then(response => {
                 if (response.status !== 200) {
                     console.error("[ERROR] Response status:", response.status);
@@ -384,7 +389,7 @@ class UserService {
 
         try {
             const response = await fetch(
-                "https://nodeexpressapi-n9sc.onrender.com/api/users/",
+                URL + "api/users/",
                 {
                     method: 'POST',
                     headers: {
@@ -440,7 +445,7 @@ class UserService {
 
         try {
             const response = await fetch(
-                `https://nodeexpressapi-n9sc.onrender.com/api/users/${user.id}`,
+                `${URL}api/users/${user.id}`,
                 {
                     method: 'PATCH',
                     headers: {
@@ -479,7 +484,7 @@ class UserService {
 
         try {
             const response = await fetch(
-                `https://nodeexpressapi-n9sc.onrender.com/api/users/${id}`,
+                `${URL}api/users/${id}`,
                 {
                     method: 'DELETE'
                 })
@@ -517,7 +522,7 @@ if(formAdd !== null) {
     //event to activate Add button
     formAdd.addEventListener('input', UI.activateAddButton);
 
-    //event to add user to DB, get list of all users,
+//event to add user to DB, get list of all users,
 // find specific user, create user as an object,
 // and display specific user in a table
 
@@ -575,25 +580,39 @@ if(formEdit !== null) {
     })
 
     firstNameInput.addEventListener('input', () => {
-        firstNameInput.style.background = "#E8F0FE";
-        UI.activateEditButton();
+        if (firstNameInput.value.trim()) {
+            firstNameInput.style.background = "#E8F0FE";
+            UI.activateEditButton();
+        } else {
+            firstNameInput.style.backgroundColor = "";
+            UI.deactivateEditButton();
+        }
     })
 
     lastNameInput.addEventListener('input', () => {
-        lastNameInput.style.background = "#E8F0FE";
-        UI.activateEditButton();
+        if (lastNameInput.value) {
+            lastNameInput.style.background = "#E8F0FE";
+            UI.activateEditButton();
+        } else {
+            lastNameInput.style.backgroundColor = "";
+            UI.deactivateEditButton();
+        }
     })
 
     ageInput.addEventListener('input', () => {
-        ageInput.style.background = "#E8F0FE";
-        UI.activateEditButton();
+        if (ageInput.value.trim()) {
+            ageInput.style.background = "#E8F0FE";
+            UI.activateEditButton();
+        } else {
+            ageInput.style.background = "";
+            UI.deactivateEditButton();
+        }
     })
 
     editButton.addEventListener('click', async () => {
         await UI.editUser();
         UI.clearLocalStorage();
     })
-
 }
 
 //we are on tab Delete
