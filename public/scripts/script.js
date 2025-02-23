@@ -20,8 +20,8 @@ const defaultFirstNamePlaceholder = "Enter first name...";
 const defaultLastNamePlaceholder = "Enter last name...";
 const defaultAgePlaceholder = "Enter age...";
 
-const URL = "http://localhost:5000/";
-//const URL = "https://nodeexpressapi-n9sc.onrender.com/";
+//const URL = "http://localhost:5000/";
+const URL = "https://nodeexpressapi-n9sc.onrender.com/";
 
 //mock data
 const usersFromData = [
