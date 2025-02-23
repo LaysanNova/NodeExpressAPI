@@ -20,8 +20,8 @@ const defaultFirstNamePlaceholder = "Enter first name...";
 const defaultLastNamePlaceholder = "Enter last name...";
 const defaultAgePlaceholder = "Enter age...";
 
-//const URL = "http://localhost:5000/";
-const URL = "https://nodeexpressapi-n9sc.onrender.com/";
+const URL = "http://localhost:5000/";
+//const URL = "https://nodeexpressapi-n9sc.onrender.com/";
 
 //mock data
 const usersFromData = [
@@ -278,12 +278,8 @@ class UI {
         ageInput.placeholder = age ? age : defaultAgePlaceholder;
     }
 
-    static activateEditButton() {
-        editButton.disabled = false;
-    }
-
-    static deactivateEditButton() {
-        editButton.disabled = true;
+    static activateEditButton(shouldActivate) {
+        editButton.disabled = !shouldActivate;
     }
 
     static activateDeleteButton() {
@@ -582,31 +578,31 @@ if(formEdit !== null) {
     firstNameInput.addEventListener('input', () => {
         if (firstNameInput.value.trim()) {
             firstNameInput.style.background = "#E8F0FE";
-            UI.activateEditButton();
         } else {
             firstNameInput.style.backgroundColor = "";
-            UI.deactivateEditButton();
         }
+
+        UI.activateEditButton(firstNameInput.value.trim());
     })
 
     lastNameInput.addEventListener('input', () => {
-        if (lastNameInput.value) {
+        if (lastNameInput.value.trim()) {
             lastNameInput.style.background = "#E8F0FE";
-            UI.activateEditButton();
         } else {
             lastNameInput.style.backgroundColor = "";
-            UI.deactivateEditButton();
         }
+
+        UI.activateEditButton(lastNameInput.value.trim());
     })
 
     ageInput.addEventListener('input', () => {
         if (ageInput.value.trim()) {
             ageInput.style.background = "#E8F0FE";
-            UI.activateEditButton();
         } else {
             ageInput.style.background = "";
-            UI.deactivateEditButton();
         }
+
+        UI.activateEditButton(ageInput.value.trim());
     })
 
     editButton.addEventListener('click', async () => {
