@@ -132,4 +132,4 @@ dist
 .idea/
 
 .DS_Store
-docker_commands
+docker_commands.txt
