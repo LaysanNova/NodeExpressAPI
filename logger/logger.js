@@ -12,10 +12,6 @@ class Log {
     server = text => {
         console.info(`[${getDate()}]`, "[SERV]", text);
     }
-
-    //api
-    //runner
-    //test
 }
 
 function getDate() {

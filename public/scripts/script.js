@@ -20,8 +20,8 @@ const defaultFirstNamePlaceholder = "Enter first name...";
 const defaultLastNamePlaceholder = "Enter last name...";
 const defaultAgePlaceholder = "Enter age...";
 
-//const URL = "http://localhost:5000/";
-const URL = "https://nodeexpressapi-n9sc.onrender.com/";
+const URL = "http://localhost:5000/";
+//const URL = "https://nodeexpressapi-n9sc.onrender.com/";
 
 //mock data
 const usersFromData = [
@@ -325,7 +325,6 @@ class UI {
         const id = localStorage.getItem('idValue');
         await UserService.deleteUsers(id);
     }
-
 }
 
 class AppService {
@@ -354,18 +353,12 @@ class UserService {
                     console.error("[ERROR] Response status:", response.status);
                     throw new Error("[ERROR] Failed to fetch users.");
                 }
-                //if response.code === 200,  we have 2 ways
                 const contentType = response.headers.get('Content-Type');
 
                 if(contentType.includes('text/html')) {
-                    //1. "There are no users."
-                    //      if Content-Type = 'text/html'
                     return response.text();
                 } else if (contentType.includes('application/json')) {
-                    //2. list of users in json format
-                    //      if Content-Type = 'application/json'
                     return response.json();
-                    //catchError
                 } else {
                     console.error("[ERROR] Unexpected Content-Type: ", contentType);
                     throw new Error("[ERROR] Unexpected Content-Type.");
@@ -436,8 +429,6 @@ class UserService {
         if(user.age) {
             body.age = user.age;
         }
-
-        console.log("body = ", body);
 
         try {
             const response = await fetch(
@@ -605,9 +596,11 @@ if(formEdit !== null) {
         UI.activateEditButton(ageInput.value.trim());
     })
 
-    editButton.addEventListener('click', async () => {
+    editButton.addEventListener('click', async (event) => {
+        event.preventDefault();
         await UI.editUser();
         UI.clearLocalStorage();
+        window.location.reload();
     })
 }
 
@@ -618,8 +611,10 @@ if(formDelete !== null) {
         UI.activateDeleteButton();
     })
 
-    deleteButton.addEventListener('click', async () => {
+    deleteButton.addEventListener('click', async (event) => {
+        event.preventDefault();
         await UI.deleteUser();
         UI.clearLocalStorage();
+        window.location.reload();
     })
 }
