@@ -38,10 +38,6 @@ h2 {
     color: red;
 }
 
-input[readonly]::placeholder {
-    color: darkgrey;
-}
-
 td a {
     width: 100%;
     display: block;
