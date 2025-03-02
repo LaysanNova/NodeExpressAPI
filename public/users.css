@@ -31,14 +31,19 @@ h2 {
 }
 
 #editIcon a:hover {
-    color: #056002;
+    color: darkcyan;
 }
 
 #deleteIcon a:hover {
     color: red;
 }
 
+input[readonly]::placeholder {
+    color: darkgrey;
+}
+
 td a {
     width: 100%;
     display: block;
 }
+
